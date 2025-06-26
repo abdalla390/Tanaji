@@ -8,7 +8,7 @@ import sentencepiece as spm
 
 # Load the trained tokenizer model
 sp = spm.SentencePieceProcessor()
-sp.load("tkn.model")
+sp.load("Tokenizer/TnjTknz.model")
 
 VOCAB_SIZE = sp.vocab_size()
 
@@ -60,31 +60,27 @@ def build_model():
     return model
 
 # --- 4. Training the Model ---
-if __name__ == "__main__":
-    train_dataset = load_tfrecord_dataset("train_melspec.tfrecord")
-    val_dataset = load_tfrecord_dataset("val_melspec.tfrecord")
-    
-    model = build_model()
-    model.summary()
-    
-    model.fit(train_dataset, validation_data=val_dataset, epochs=50)
-    
-    # Save model after training
-    model.save("cnn_bi_gru.h5")
-
 
 if __name__ == "__main__":
     
-    number_of_tfrecord = 0
+    number_of_tfrecord = 10  
 
-    for shard_index in range(0, number_of_tfrecord/2):
-        train_dataset = load_tfrecord_dataset("dataset/train_melspec_{shard_index:05d}.tfrecord")
-        val_dataset = load_tfrecord_dataset("dataset/val_melspec_{(number_of_tfrecord - shard_index):05d}.tfrecord")
-    
+    for shard_index in range(number_of_tfrecord):
+        train_dataset = load_tfrecord_dataset(
+            f"spectrograms/train_melspec_{shard_index:05d}.tfrecord"
+        )
+        val_dataset = load_tfrecord_dataset(
+            f"spectrograms/val_melspec_{shard_index:05d}.tfrecord"
+        )
+
         model = build_model()
         model.summary()
-    
-        model.fit(train_dataset, validation_data=val_dataset, epochs=50)
+
+        model.fit(
+            train_dataset,
+            validation_data=val_dataset,
+            epochs=50
+        )
     
     # Save model after training
     model.save("cnn_bi_gru.h5")

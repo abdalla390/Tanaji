@@ -4,12 +4,9 @@ import sentencepiece as spm
 
 
 sp = spm.SentencePieceProcessor()
-sp.load("tkn.model")
+sp.load("Tokenizer/TnjTknz.model")
 
 VOCAB_SIZE = sp.vocab_size()
-
-# Load trained model
-model = load_model("cnn_bi_gru.h5")
 
 # Function to preprocess new audio into Mel-spectrogram
 def preprocess_audio(audio_path):
@@ -23,10 +20,10 @@ def preprocess_audio(audio_path):
 
 
 # Load trained model
-model = load_model("cnn_bi_gru_seq2seq.h5")
+model = load_model("cnn_bi_gru.h5")
 
 # Process new audio
-audio_path = "new_audio.wav"
+audio_path = "test_audio.wav"
 mel_spec = preprocess_audio(audio_path)
 
 # Predict token probabilities

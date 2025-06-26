@@ -7,7 +7,7 @@ import sentencepiece as spm
 
 # Load SentencePiece model
 sp = spm.SentencePieceProcessor()
-sp.load("tkn.model")
+sp.load("../Tokenizer/TnjTknz.model")
 
 VOCAB_SIZE = sp.vocab_size()
 
@@ -38,11 +38,11 @@ def _int64_feature(value):
     return tf.train.Feature(int64_list=tf.train.Int64List(value=value))
 
 # Adjust this path to point to your Samsung 860 EVO drive.
-OUTPUT_DIR = "/Volumes/Samsung 860 EVO/spectrograms"  
+OUTPUT_DIR = "/home/proot390/python/ML/Text-to-Speech/Tanaji/spectrograms"  
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # 1. Load dataset in streaming mode to avoid full download
-ds_stream = load_dataset("tarteel-ai/EA-DI", split="train", streaming=True)
+ds_stream = load_dataset("tarteel-ai/EA-DI", split="train", streaming=False)
 
 # 2. Shard parameters
 SHARD_SIZE = 1000  
