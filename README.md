@@ -6,3 +6,6 @@ It uses Tarteel AI Quran data base to train a foundational model to instead of f
 The main dataset we use is https://huggingface.co/datasets/tarteel-ai/EA-DI made by the lovely folks over at Tarteel AI. 
 
 This is a quick project we are tackling as students to further our knowledge in Machine Learning and also make a good faithed project that has the potential to help many people along the way.
+
+
+The first model V1 is avaiable at: https://huggingface.co/abdalla390/Tanaji/tree/main
